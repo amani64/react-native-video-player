@@ -80415,7 +80415,7 @@ __d(function (global, _$$_REQUIRE, module, exports, _dependencyMap) {
         var nativeResizeMode;
 
         if (resizeMode === _VideoResizeMode.default.stretch) {
-          nativeResizeMode = _reactNative.NativeModules.UIManager.RCTVideo.Constants.ScaleToFill;
+          nativeResizeMode = _reactNative.NativeModules.UIManager.RCTAVideo.Constants.ScaleToFill;
         } else if (resizeMode === _VideoResizeMode.default.contain) {
           nativeResizeMode = _reactNative.NativeModules.UIManager.RCTVideo.Constants.ScaleAspectFit;
         } else if (resizeMode === _VideoResizeMode.default.cover) {

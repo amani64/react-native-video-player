@@ -109,7 +109,7 @@ Scroll to « Linked Frameworks and Libraries » and tap on the + button
 
 <img src="./docs/tvOS-step-3.jpg" width="40%">
 
-Select RCTVideo-tvOS
+Select RCTAVideo-tvOS
 
 <img src="./docs/tvOS-step-4.jpg" width="40%">
 </details>
@@ -222,12 +222,12 @@ Make the following additions to the given files manually:
 
 #### **dom/bootstrap.js**
 
-Import RCTVideoManager and add it to the list of nativeModules:
+Import RCTAVideoManager and add it to the list of nativeModules:
 
 ```javascript
 import { RNDomInstance } from "react-native-dom";
 import { name as appName } from "../app.json";
-import RCTVideoManager from 'react-native-video/dom/RCTVideoManager'; // Add this
+import RCTAVideoManager from 'react-native-video/dom/RCTAVideoManager'; // Add this
 
 // Path to RN Bundle Entrypoint ================================================
 const rnBundlePath = "./entry.bundle?platform=dom&dev=true";
@@ -235,7 +235,7 @@ const rnBundlePath = "./entry.bundle?platform=dom&dev=true";
 // React Native DOM Runtime Options =============================================
 const ReactNativeDomOptions = {
   enableHotReload: false,
-  nativeModules: [RCTVideoManager] // Add this
+  nativeModules: [RCTAVideoManager] // Add this
 };
 ```
 </details>

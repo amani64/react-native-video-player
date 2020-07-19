@@ -11,7 +11,7 @@
 - Added `trackId` (Android ExoPlayer) - Configure an identifier for the video stream to link the playback context to the events emitted. (#1944)
 - Added preventsDisplaySleepDuringVideoPlayback (#2019)
 - Reverted the JS fullscreening for Android. [#2013](https://github.com/react-native-community/react-native-video/pull/2013)
-- Set iOS request headers without needing to edit RCTVideo.m. [#2014](https://github.com/react-native-community/react-native-video/pull/2014)
+- Set iOS request headers without needing to edit RCTAVideo.m. [#2014](https://github.com/react-native-community/react-native-video/pull/2014)
 - Fix exoplayer aspect ratio update on source changes [#2053](https://github.com/react-native-community/react-native-video/pull/2053)
 
 ### Version 5.1.0-alpha5
@@ -39,7 +39,7 @@
 
 ### Version 5.0.2
 
-- Fix crash when RCTVideo's superclass doesn't observe the keyPath 'frame' (iOS) [#1720](https://github.com/react-native-community/react-native-video/pull/1720)
+- Fix crash when RCTAVideo's superclass doesn't observe the keyPath 'frame' (iOS) [#1720](https://github.com/react-native-community/react-native-video/pull/1720)
 
 ### Version 5.0.1
 
@@ -78,7 +78,7 @@
 
 ### Version 4.4.0
 
-- Fix runtime warning by replacing `UIManager.RCTVideo` with `UIManager.getViewManagerConfig('RCTVideo')` (and ensuring backwards compat) [#1487](https://github.com/react-native-community/react-native-video/pull/1487)
+- Fix runtime warning by replacing `UIManager.RCTAVideo` with `UIManager.getViewManagerConfig('RCTAVideo')` (and ensuring backwards compat) [#1487](https://github.com/react-native-community/react-native-video/pull/1487)
 - Fix loading package resolved videos when using video-caching [#1438](https://github.com/react-native-community/react-native-video/pull/1438)
 - Fix "message sent to deallocated instance" crash on ios [#1482](https://github.com/react-native-community/react-native-video/pull/1482)
 - Display a warning when source is empty [#1478](https://github.com/react-native-community/react-native-video/pull/1478)

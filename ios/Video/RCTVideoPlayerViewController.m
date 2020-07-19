@@ -1,6 +1,6 @@
-#import "RCTVideoPlayerViewController.h"
+#import "RCTAVideoPlayerViewController.h"
 
-@interface RCTVideoPlayerViewController ()
+@interface RCTAVideoPlayerViewController ()
 
 @end
 

@@ -1,14 +1,14 @@
-#import "RCTVideoCache.h"
+#import "RCTAVideoCache.h"
 
-@implementation RCTVideoCache
+@implementation RCTAVideoCache
 
 @synthesize videoCache;
 @synthesize cachePath;
 @synthesize cacheIdentifier;
 @synthesize temporaryCachePath;
 
-+ (RCTVideoCache *)sharedInstance {
-  static RCTVideoCache *sharedInstance = nil;
++ (RCTAVideoCache *)sharedInstance {
+  static RCTAVideoCache *sharedInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     sharedInstance = [[self alloc] init];
@@ -109,8 +109,8 @@
                                NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Missing file extension.", nil),
                                NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Missing file extension.", nil)
                                };
-    NSError *error = [NSError errorWithDomain:@"RCTVideoCache"
-                                         code:RCTVideoCacheStatusMissingFileExtension userInfo:userInfo];
+    NSError *error = [NSError errorWithDomain:@"RCTAVideoCache"
+                                         code:RCTAVideoCacheStatusMissingFileExtension userInfo:userInfo];
     @throw error;
   } else if (![supportedExtensions containsObject:pathExtension]) {
     // Notably, we don't currently support m3u8 (HLS playlists)
@@ -119,37 +119,37 @@
                                NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Unsupported file extension.", nil),
                                NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Unsupported file extension.", nil)
                                };
-    NSError *error = [NSError errorWithDomain:@"RCTVideoCache"
-                                         code:RCTVideoCacheStatusUnsupportedFileExtension userInfo:userInfo];
+    NSError *error = [NSError errorWithDomain:@"RCTAVideoCache"
+                                         code:RCTAVideoCacheStatusUnsupportedFileExtension userInfo:userInfo];
     @throw error;
   }
   return [[self generateHashForUrl:uri] stringByAppendingPathExtension:pathExtension];
 }
 
-- (void)getItemForUri:(NSString *)uri withCallback:(void(^)(RCTVideoCacheStatus, AVAsset * _Nullable)) handler {
+- (void)getItemForUri:(NSString *)uri withCallback:(void(^)(RCTAVideoCacheStatus, AVAsset * _Nullable)) handler {
   @try {
     NSString *key = [self generateCacheKeyForUri:uri];
     AVURLAsset * temporaryAsset = [self getItemFromTemporaryStorage:key];
     if (temporaryAsset != nil) {
-      handler(RCTVideoCacheStatusAvailable, temporaryAsset);
+      handler(RCTAVideoCacheStatusAvailable, temporaryAsset);
       return;
     }
     
     [self.videoCache loadDataForKey:key withCallback:^(SPTPersistentCacheResponse * _Nonnull response) {
       if (response.record == nil || response.record.data == nil) {
-        handler(RCTVideoCacheStatusNotAvailable, nil);
+        handler(RCTAVideoCacheStatusNotAvailable, nil);
         return;
       }
       [self saveDataToTemporaryStorage:response.record.data key:key];
-      handler(RCTVideoCacheStatusAvailable, [self getItemFromTemporaryStorage:key]);
+      handler(RCTAVideoCacheStatusAvailable, [self getItemFromTemporaryStorage:key]);
     } onQueue:dispatch_get_main_queue()];
   } @catch (NSError * err) {
     switch (err.code) {
-      case RCTVideoCacheStatusMissingFileExtension:
-        handler(RCTVideoCacheStatusMissingFileExtension, nil);
+      case RCTAVideoCacheStatusMissingFileExtension:
+        handler(RCTAVideoCacheStatusMissingFileExtension, nil);
         return;
-      case RCTVideoCacheStatusUnsupportedFileExtension:
-        handler(RCTVideoCacheStatusUnsupportedFileExtension, nil);
+      case RCTAVideoCacheStatusUnsupportedFileExtension:
+        handler(RCTAVideoCacheStatusUnsupportedFileExtension, nil);
         return;
       default:
         @throw err;
